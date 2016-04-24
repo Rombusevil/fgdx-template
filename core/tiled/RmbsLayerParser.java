@@ -1,0 +1,41 @@
+package com.rombus.evilbones.template.tiled;
+
+import java.util.HashMap;
+import org.flixel.FlxState;
+import org.flixel.FlxTilemap;
+import com.badlogic.gdx.utils.Array;
+import com.badlogic.gdx.utils.JsonValue;
+
+/**
+ * Created by Rombus on 02/04/16.
+ */
+public abstract class RfLayerParser {
+	protected static String spriteSheet;
+	protected static int tileSize;         // Asume tiles are squares
+
+	public RfLayerParser(String spriteSheet, Integer tileSize){
+		RfLayerParser.spriteSheet = spriteSheet;
+		RfLayerParser.tileSize = tileSize;
+	}
+
+    protected FlxTilemap handleLayer(HashMap<String, String> layers, String layer, FlxState gameState){
+		FlxTilemap tm = new FlxTilemap();
+		tm.loadMap(layers.get(layer), RfLayerParser.spriteSheet, RfLayerParser.tileSize, RfLayerParser.tileSize, 0,1);
+		gameState.add(tm);
+		return tm;
+	}
+
+	public abstract void parseLayers(FlxState gameState, HashMap<String, String> layers, HashMap<String, Array<JsonValue>> objects);
+    /*
+    Implementación a modo de ejemplo:
+    {
+        FlxTilemap background1, background2, collidable;
+
+        background1 = handleLayer(layers, "background-1", gameState);
+        background2 = handleLayer(layers, "background-2", gameState);
+        collidable  = handleLayer(layers, "collidable", gameState);
+        
+        parseObjects(gameState, objects);
+    }
+    */
+}
