@@ -18,7 +18,7 @@ public abstract class RfLayerParser {
 		RfLayerParser.tileSize = tileSize;
 	}
 
-    protected FlxTilemap handleLayer(HashMap<String, String> layers, String layer, FlxState gameState){
+	protected FlxTilemap handleLayer(HashMap<String, String> layers, String layer, FlxState gameState){
 		FlxTilemap tm = new FlxTilemap();
 		tm.loadMap(layers.get(layer), RfLayerParser.spriteSheet, RfLayerParser.tileSize, RfLayerParser.tileSize, 0,1);
 		gameState.add(tm);
@@ -26,16 +26,15 @@ public abstract class RfLayerParser {
 	}
 
 	public abstract void parseLayers(FlxState gameState, HashMap<String, String> layers, HashMap<String, Array<JsonValue>> objects);
-    /*
-    Implementación a modo de ejemplo:
-    {
-        FlxTilemap background1, background2, collidable;
-
-        background1 = handleLayer(layers, "background-1", gameState);
-        background2 = handleLayer(layers, "background-2", gameState);
-        collidable  = handleLayer(layers, "collidable", gameState);
-        
-        parseObjects(gameState, objects);
-    }
-    */
+	/*
+	Implementación a modo de ejemplo {
+		FlxTilemap background1, background2, collidable;
+		
+		background1 = handleLayer(layers, "background-1", gameState);
+		background2 = handleLayer(layers, "background-2", gameState);
+		collidable  = handleLayer(layers, "collidable", gameState);
+		
+		parseObjects(gameState, objects);
+	}
+	*/
 }
