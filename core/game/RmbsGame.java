@@ -17,15 +17,15 @@ public class RmbsGame extends FlxGame {
 
 	public RmbsGame(boolean allowMobile, int GameSizeX, int GameSizeY, Class<? extends FlxState> InitialState, float Zoom, int GameFramerate, int FlashFramerate, boolean UseSystemCursor, int ScaleMode) {
 		super(GameSizeX, GameSizeY, InitialState, Zoom, GameFramerate, FlashFramerate, UseSystemCursor, ScaleMode);
-        this.allowMobile = allowMobile;
+		this.allowMobile = allowMobile;
 	}
 
 	@Override
 	protected void onFocusLost(Event FlashEvent) {
 		super.onFocus(FlashEvent);
 
-        if(!this.allowMobile){
-            _lostFocus = false;
-        }
+		if(!this.allowMobile){
+		    _lostFocus = false;
+		}
 	}
 }

@@ -18,7 +18,7 @@ public abstract class RmbsLayerParser {
 		RmbsLayerParser.tileSize = tileSize;
 	}
 
-    protected FlxTilemap handleLayer(HashMap<String, String> layers, String layer, FlxState gameState){
+	protected FlxTilemap handleLayer(HashMap<String, String> layers, String layer, FlxState gameState){
 		FlxTilemap tm = new FlxTilemap();
 		tm.loadMap(layers.get(layer), RmbsLayerParser.spriteSheet, RmbsLayerParser.tileSize, RmbsLayerParser.tileSize, 0,1);
 		gameState.add(tm);

@@ -43,8 +43,8 @@ public class RmbsTiledManager {
 		try {
 			this.layerParser = layerParser.getConstructor(String.class, Integer.class).newInstance(spriteSheetPath, tileSize);
 		} catch (ClassCastException 		| InstantiationException 	|
-				 IllegalAccessException 	| IllegalArgumentException	|
-				 InvocationTargetException 	| NoSuchMethodException 	|SecurityException e) {
+			IllegalAccessException 		| IllegalArgumentException	|
+			InvocationTargetException 	| NoSuchMethodException 	|SecurityException e) {
 			e.printStackTrace();
 		}
 	}
@@ -135,7 +135,7 @@ public class RmbsTiledManager {
 				if(layer == null){
 					break;
 				}
-                layer = layer.next();
+				layer = layer.next();
 			} catch (NullPointerException e) {}
 		}
 	}
