@@ -12,16 +12,16 @@ import com.badlogic.gdx.utils.JsonValue;
 
 /**
  * Class for managing tiled map json exported maps.
- * This class works with RmbsLayerParser to delegate the parsing of the specific layers and objects. 
+ * This class works with RmbsLayerParser to delegate the parsing of the specific layers and objects.
  *
  * @author Rombus
  *
  * 24/04/2016 00:31:43
  */
-public class RfTiledManager {
+public class RmbsTiledManager {
 	private static int tileSize;
 	private static String objectsLayerName;
-	private RfLayerParser layerParser;
+	private RmbsLayerParser layerParser;
 
 	/**
 	 * Parser de mapas Tiled exportados en JSON.
@@ -33,11 +33,11 @@ public class RfTiledManager {
 	 * @param tileSize
 	 * @param spriteSheetPath
 	 * @param objectsLayerName	El nombre de la capa de tiled donde están definidos los objetos.
-	 * @param layerParser		La clase que implementa la interfaz RfLayerParser que se va a utilizar para parsear las capas de este mapa. Típicamente es una por proyecto.
+	 * @param layerParser		La clase que implementa la interfaz RmbsLayerParser que se va a utilizar para parsear las capas de este mapa. Típicamente es una por proyecto.
 	 */
-	public RfTiledManager(int tileSize, String spriteSheetPath, String objectsLayerName, Class<? extends RfLayerParser> layerParser){
-		RfTiledManager.objectsLayerName = objectsLayerName;
-		RfTiledManager.tileSize = tileSize;
+	public RmbsTiledManager(int tileSize, String spriteSheetPath, String objectsLayerName, Class<? extends RmbsLayerParser> layerParser){
+		RmbsTiledManager.objectsLayerName = objectsLayerName;
+		RmbsTiledManager.tileSize = tileSize;
 
 		// Strategy patter for parsing objects layer
 		try {
@@ -60,7 +60,7 @@ public class RfTiledManager {
 		HashMap<String, Array<JsonValue>> objectsJson = new HashMap<String, Array<JsonValue>>();
 
 		// Cargo las layers y objectsJson. También seteo la FlxG.camera para que tenga los bounds del mapa.
-		parseMap(jsonMapPath, RfTiledManager.objectsLayerName, layers, objectsJson);
+		parseMap(jsonMapPath, RmbsTiledManager.objectsLayerName, layers, objectsJson);
 
 		// Delego el parseo de layers a algún RmbsLayerParser
 		this.layerParser.parseLayers(gameState, layers, objectsJson);
@@ -93,7 +93,7 @@ public class RfTiledManager {
 		int heightInTiles = layer.getInt("height");
 
 		// Setup the camera to the map's size
-		FlxG.camera.setBounds(0, 0, widthInTiles * RfTiledManager.tileSize, heightInTiles * RfTiledManager.tileSize, true);
+		FlxG.camera.setBounds(0, 0, widthInTiles * RmbsTiledManager.tileSize, heightInTiles * RmbsTiledManager.tileSize, true);
 
 
 		// Inspecciono el json y me cargo las layers en el hashmap layerData, y los objetos en el array objects.

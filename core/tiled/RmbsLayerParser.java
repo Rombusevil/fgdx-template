@@ -9,18 +9,18 @@ import com.badlogic.gdx.utils.JsonValue;
 /**
  * Created by Rombus on 02/04/16.
  */
-public abstract class RfLayerParser {
+public abstract class RmbsLayerParser {
 	protected static String spriteSheet;
 	protected static int tileSize;         // Asume tiles are squares
 
-	public RfLayerParser(String spriteSheet, Integer tileSize){
-		RfLayerParser.spriteSheet = spriteSheet;
-		RfLayerParser.tileSize = tileSize;
+	public RmbsLayerParser(String spriteSheet, Integer tileSize){
+		RmbsLayerParser.spriteSheet = spriteSheet;
+		RmbsLayerParser.tileSize = tileSize;
 	}
 
     protected FlxTilemap handleLayer(HashMap<String, String> layers, String layer, FlxState gameState){
 		FlxTilemap tm = new FlxTilemap();
-		tm.loadMap(layers.get(layer), RfLayerParser.spriteSheet, RfLayerParser.tileSize, RfLayerParser.tileSize, 0,1);
+		tm.loadMap(layers.get(layer), RmbsLayerParser.spriteSheet, RmbsLayerParser.tileSize, RmbsLayerParser.tileSize, 0,1);
 		gameState.add(tm);
 		return tm;
 	}
@@ -34,7 +34,7 @@ public abstract class RfLayerParser {
         background1 = handleLayer(layers, "background-1", gameState);
         background2 = handleLayer(layers, "background-2", gameState);
         collidable  = handleLayer(layers, "collidable", gameState);
-        
+
         parseObjects(gameState, objects);
     }
     */
