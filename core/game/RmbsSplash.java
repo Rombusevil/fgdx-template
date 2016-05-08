@@ -14,6 +14,7 @@ import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenCallback;
 
 import com.rombus.evilbones.template.utils.AssetsLocator;
+import com.rombus.evilbones.template.utils.Constants;
 
 /**
  * For creating splash screens.
@@ -24,69 +25,94 @@ import com.rombus.evilbones.template.utils.AssetsLocator;
  *
  * 07/05/2016 20:03:06
  */
-public class RmbsSplash extends FlxState {
-	private static final float TIME_FI = 2f, TIME = 2f;
-	private float timeFadeIn, time;
-	private FlxSprite image;
-	private FlxSound sound;
-	private FlxTimer timer;
-	private IFlxTimer switchStateCallback;
+ public class RmbsSplash extends FlxState {
+ 	private static final float TIME_FI = 2f, TIME = 4.5f;
+ 	private float timeFadeIn, time;
+ 	private FlxSprite image;
+ 	private FlxSound sound;
+ 	private FlxTimer timer;
+ 	private IFlxTimer switchStateCallback;
 
-    private FlxState nextState = null;
-    private String simage, ssound;
+     private FlxState nextState = null;
+     private String simage, ssound;
 
-    // Override this method to configure the RmbsSplash
-	public void setup(){
-		this.nextState = new MenuState();
-		this.simage = AssetsLocator.SPLASH;
-		this.ssound = AssetsLocator.SPLASH_SFX;
-		this.timeFadeIn = TIME_FI;
-		this.time = TIME;
-	}
-
-
-	@Override
-	public void create() {
-		setup();
-
-        this.image = new FlxSprite(0, 0, this.simage);
-        this.sound = new FlxSound();
-        this.sound.loadEmbedded(this.ssound, false, true);
-
-        this.timer = new FlxTimer();
-        this.switchStateCallback = new IFlxTimer() {
-            @Override
-            public void callback(FlxTimer Timer) {
-                FlxG.switchState(nextState);
-            }
-        };
+     // Override this method to configure the RmbsSplash
+ 	public void setup(){
+ 		this.nextState = new MenuState();
+ 		this.simage = AssetsLocator.SPLASH;
+ 		this.ssound = AssetsLocator.SPLASH_SFX;
+ 		this.timeFadeIn = TIME_FI;
+ 		this.time = TIME;
+ 	}
 
 
-		sound.play(true);
+ 	@Override
+ 	public void create() {
+ 		setup();
 
-		image.setAlpha(0);
-		add(image);
+         this.image = new FlxSprite(0, 0, this.simage);
+         this.sound = new FlxSound();
+         this.sound.loadEmbedded(this.ssound, false, true);
+         this.timer = new FlxTimer();
+         this.switchStateCallback = new IFlxTimer() {
+             @Override
+             public void callback(FlxTimer Timer) {
+                 FlxG.switchState(nextState);
+             }
+         };
 
-		Tween.to(image, TweenSprite.ALPHA, timeFadeIn)
-			.target(1)
-			.start(TweenPlugin.manager);
+ 		sound.play(true);
 
-		Tween.call(new TweenCallback() {
-			@Override
-			public void onEvent(int type, BaseTween<?> source) {
-				timer.start(time, 1, switchStateCallback);
-			}
-		});
-	}
+ 		int scale = getImageScale(image);
+ 		image.scale.x = image.scale.y = scale;
 
+ 		// Center image
+ 		image.origin.x = image.width / 2;
+ 		image.origin.y = image.height/ 2 ;
+ 		image.x = FlxG.width / 2 - image.width / 2;
+ 		image.y = FlxG.height/ 2 - image.height/ 2;
 
-	@Override
-	public void destroy() {
-		image.destroy();
-		sound.destroy();
-		timer.destroy();
+ 		image.setAlpha(0);
+ 		add(image);
 
-		super.destroy();
-	}
+ 		Tween.to(image, TweenSprite.ALPHA, timeFadeIn)
+ 			.target(1)
+ 			.setCallback(new TweenCallback() {
+ 				@Override
+ 				public void onEvent(int type, BaseTween<?> source) {
+ 					timer.start(time, 1, switchStateCallback);
+ 				}
+ 			})
+ 			.start(TweenPlugin.manager);
+ 	}
 
-}
+ 	// Returns the scale neede for the image to take as much screen space as possible.
+ 	private int getImageScale(FlxSprite image){
+ 		float sw = image.width;
+ 		float sh = image.height;
+ 		int scale = 1;
+
+ 		if(sw >= sh){
+ 			while(sw < Constants.WIDTH_RESOLUTION){
+ 				sw*=2;
+ 				scale++;
+ 			}
+ 		} else {
+ 			while(sh < Constants.HEIGHT_RESOLUTION){
+ 				sh*=2;
+ 				scale++;
+ 			}
+ 		}
+
+ 		return scale;
+ 	}
+
+ 	@Override
+ 	public void destroy() {
+ 		image.destroy();
+ 		sound.destroy();
+ 		timer.destroy();
+
+ 		super.destroy();
+ 	}
+ }

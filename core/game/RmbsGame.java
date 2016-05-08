@@ -30,6 +30,11 @@ public class RmbsGame extends FlxGame {
 
         Tween.setWaypointsLimit(Constants.TWEEN_ENGINE_WAYPOINTS);
         FlxG.addPlugin(new TweenPlugin());
+
+        if(Constants.DEBUG){
+	    	FlxG.debug = true;
+	    	FlxG.visualDebug = true;
+    	}
 	}
 
 	@Override

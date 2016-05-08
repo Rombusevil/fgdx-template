@@ -5,7 +5,7 @@ import org.flixel.FlxState;
 import com.rombus.evilbones.template.game.RmbsSplash;
 
 public class Constants {
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 
 	// FlxGame configurations
 	public static final int WIDTH_RESOLUTION = 800;
