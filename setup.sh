@@ -18,8 +18,8 @@ function process {
 			if [[ "$pkg" != *"java"* ]]; then
 				folder=$(echo $pkg | sed "s/;$//")
 				folder=$(echo $folder | sed "s/\./\//g")
-				mkdir -p "$proj/$folder"
-				mv $file "$proj/$folder/"
+				mkdir -p "$proj/src/$folder"
+				mv $file "$proj/src/$folder/"
 			else
 				file=$(echo "$pkg" | sed "s/^\.\///")
 				proj=$(echo "$file" | cut -d'/' -f 1)
