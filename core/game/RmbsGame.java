@@ -1,16 +1,18 @@
 package com.rombus.evilbones.template.game;
 
+import org.flixel.FlxG;
 import org.flixel.FlxGame;
-import org.flixel.FlxState;
 import flash.events.Event;
 import com.rombus.evilbones.template.utils.Constants;
 import aurelienribon.tweenengine.Tween;
+import org.flixel.plugin.tweens.TweenPlugin;
 
 /**
  * This class allows the PC version not to pause when not in focus.
  * It has to be compiled with the "allowMobile" flag with false value.
+ * It also configures TweenEngine and leaves it ready for use.
  *
- * For configuring it use Constants class.
+ * Use the Constants class for game specific configurations.
  *
  * @author Rombus
  *
@@ -27,6 +29,7 @@ public class RmbsGame extends FlxGame {
 		this.pcBuild = Constants.PC_BUILD;
 
         Tween.setWaypointsLimit(Constants.TWEEN_ENGINE_WAYPOINTS);
+        FlxG.addPlugin(new TweenPlugin());
 	}
 
 	@Override
