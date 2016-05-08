@@ -22,7 +22,7 @@ public class RmbsGame extends FlxGame {
     private final boolean pcBuild;
 
 	public RmbsGame() {
-		super(Constants.WIDTH_RESOLUTION, Constants.HEIGHT_RESOLUTION, Constants.INIT_STATE, this.ZOOM, this.FPS, this.FPS, Constants.USE_SYSTEM_CURSOR, Constants.SCALE_MODE);
+		super(Constants.WIDTH_RESOLUTION, Constants.HEIGHT_RESOLUTION, Constants.INIT_STATE, ZOOM, FPS, FPS, Constants.USE_SYSTEM_CURSOR, Constants.SCALE_MODE);
 
 		this.pcBuild = Constants.PC_BUILD;
 
