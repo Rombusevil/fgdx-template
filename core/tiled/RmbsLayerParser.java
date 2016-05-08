@@ -25,5 +25,10 @@ public abstract class RmbsLayerParser {
 		return tm;
 	}
 
-	public abstract void parseLayers(FlxState gameState, HashMap<String, String> layers, HashMap<String, Array<JsonValue>> objects);
+	public void parseLayers(FlxState gameState, HashMap<String, String> layers, HashMap<String, Array<JsonValue>> objects){
+		// Default behaviour: creates an FlxTilemap for each layer and adds it to the FlxState
+		for (String key: layers.keySet()){			
+			handleLayer(layers,key, gameState);
+		}
+	}
 }
