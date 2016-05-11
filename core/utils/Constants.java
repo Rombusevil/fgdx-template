@@ -21,8 +21,10 @@ public class Constants {
 	public static final int WINDOW_HEIGHT = 600;
 	public static final String WINDOW_TITLE = "Rmbs Template";
 
-
 	// Tiled configurations
     public static final int TILE_SIZE = 16;
     public static final String OBJECTS_LAYER_NAME = "objects";
+
+	// Config
+	public static final boolean SHOW_SPLASH = false;
 }

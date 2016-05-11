@@ -49,17 +49,20 @@ import com.rombus.evilbones.template.utils.Constants;
  	@Override
  	public void create() {
  		setup();
+        if(!Constants.SHOW_SPLASH){
+			FlxG.switchState(nextState);
+		}
 
-         this.image = new FlxSprite(0, 0, this.simage);
-         this.sound = new FlxSound();
-         this.sound.loadEmbedded(this.ssound, false, true);
-         this.timer = new FlxTimer();
-         this.switchStateCallback = new IFlxTimer() {
-             @Override
-             public void callback(FlxTimer Timer) {
-                 FlxG.switchState(nextState);
-             }
-         };
+        this.image = new FlxSprite(0, 0, this.simage);
+        this.sound = new FlxSound();
+        this.sound.loadEmbedded(this.ssound, false, true);
+        this.timer = new FlxTimer();
+        this.switchStateCallback = new IFlxTimer() {
+            @Override
+            public void callback(FlxTimer Timer) {
+                FlxG.switchState(nextState);
+            }
+        };
 
  		sound.play(true);
 
